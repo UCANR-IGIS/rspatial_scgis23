@@ -1,5 +1,5 @@
 #################################################################################
-## EXERCISE 5: Importing CSV files and working with data frames
+## EXERCISE 4: Importing CSV files and working with data frames
 #################################################################################
 
 ## Import a csv
@@ -25,7 +25,7 @@ cars_df$speed
 
 mean(cars_df$speed)
 # or:
-cars_df$speed %>% mean()
+cars_df$speed |> mean()
 
 ## Make a scatter plot of speed vs breaking distance:
 

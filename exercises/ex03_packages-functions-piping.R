@@ -36,6 +36,10 @@ head(archbold.apple)
 ## Tip: Ask ChatGPT
 
 
+## CHALLENGE 4: Find a function that tests if a number is a prime number, and test it.
+## Tip: Ask ChatGPT
+
+
 #################################################
 ## PIPING
 #################################################
