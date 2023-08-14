@@ -6,8 +6,8 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <meta name="author" content="Introduction Part 1  " />
-  <meta name="copyright" content="<span class='footer-right'><a href='../acknowledgements.html'>Acknowledgements</a></span><span class='footer-right'><a href=' https://etherpad.wikimedia.org/p/rspatial-scgis23 ' target='_blank'>Forum</a></span><span class='footer-right'><a href=' https://ucanr-gis.github.io/rspatial_scgis23 '> https://ucanr-gis.github.io/rspatial_scgis23 </a></span><span class='footer-right'><a href='../index.html'>Home</a></span><span class='footer-subtitle'> Intro to Spatial Data Analysis with R </span>"/>
+  <meta name="author" content="Part 1: Intro to R for Newbies  " />
+  <meta name="copyright" content="<span class='footer-right'><a href='../acknowledgements.html'>Acknowledgements</a></span><span class='footer-right'><a href=' https://etherpad.wikimedia.org/p/rspatial-scgis23 ' target='_blank'>Forum</a></span><span class='footer-right'><a href=' https://ucanr-igis.github.io/rspatial_scgis23 '> https://ucanr-igis.github.io/rspatial_scgis23 </a></span><span class='footer-right'><a href='../index.html'>Home</a></span><span class='footer-subtitle'> Intro to Spatial Data Analysis with R </span>"/>
   <meta name="font-size-adjustment" content="2"/>
   <title>Intro</title>
   <style type="text/css">
@@ -107,7 +107,8 @@
 Analysis with R</span><br/><span class="course-subtitle">SCGIS 2023
 Annual Conference</span></h1>
   <p class="author">
-Introduction Part 1 <br/><img src='images/intro_472x220.png'/>
+Part 1: Intro to R for Newbies
+<br/><img src='images/intro_472x220.png'/>
   </p>
 </div>
 <div class="slide section level1">
@@ -172,71 +173,51 @@ target="_blank">https://ucanr-igis.shinyapps.io/uav_stocking_survey/</a></p>
 <p>Stock Pond Volume Calculator<br />
 <a href="https://ucanr-igis.shinyapps.io/PondCalc/"
 target="_blank">https://ucanr-igis.shinyapps.io/PondCalc/</a></p>
-<p>Pistachio Nut Growth Calculator <a
-href="https://ucanr-igis.shinyapps.io/pist_gdd/"
+<p>Pistachio Nut Growth Calculator<br />
+<a href="https://ucanr-igis.shinyapps.io/pist_gdd/"
 target="_blank">https://ucanr-igis.shinyapps.io/pist_gdd/</a></p>
 </div>
 <div id="about-you" class="slide section level1">
 <h1>About You…</h1>
 </div>
-<div id="workshop-goals" class="slide section level1">
-<h1>Workshop Goals</h1>
-<p>Get better at:</p>
+<div id="goal" class="slide section level1">
+<h1>Goal</h1>
+<p style="text-align:left; margin-left:2em; font-style:italic; font-size:140%; font-weight:bold; color:darkgreen;">
+Move in the direction of becoming functional with R!!
+</p>
+<p><br />
+</p>
+<h2 id="learning-strategy">Learning Strategy</h2>
+<div class="indented2">
+<p>1) Understand foundational terms and concepts</p>
+<p>2) Hands-on practice</p>
+<p>3) Discover RStudio’s bells and whistles</p>
+<p>4) Learn how to get help</p>
+</div>
+<center>
+<img src="images/learning_strategy_venn_diagram_450x450x256.png" />
+</center>
+<p><br />
+</p>
+<h2 id="todays-focus">Today’s Focus</h2>
+<p><img src="wrkshp-intro-pt1_files/figure-slidy/unnamed-chunk-1-1.png" width="768" /></p>
+<p><br />
+</p>
+<h2 id="learning-tips">Learning Tips</h2>
 <div class="indented1">
-<ul>
-<li>Working with R and RStudio</li>
-<li>Using the most common data classes and packages for spatial
-data</li>
-<li>Importing spatial data from files and online sources</li>
-<li>Fundamental spatial data processing and geoprocessing
-operations</li>
-<li><em>Basic</em> plotting</li>
-<li>Finding resources to continue learning on your own
-</div></li>
-</ul>
-<div style="text-align: center;">
-<p><img src="images/mountain_climbing_880x360.png"><br/> <span
-style="color:darkred;">Wind up a little higher on the learning
-curve!</span></p>
+<p>1) Watch now, practice later</p>
+<p>2) Review what we cover within 24 hours</p>
 </div>
-</div>
-<div id="strategy-copy-and-adapt" class="slide section level1">
-<h1>Strategy: Copy and Adapt</h1>
-<p><img
-src="images/learning_strategy_venn_diagram_450x450x256.png" /></p>
-<div
-style="text-align:right; width:400px; margin-left:100px; border-bottom:2px solid black;">
-<p>foundational concepts<br />
-+ code recipes<br />
-+ working examples<br />
-+ practice<br />
-+ a good search engine</p>
-</div>
-<div style="text-align:right; width:400px; margin-left:100px;">
-<p><strong>functional pRoficiency!</strong></p>
-</div>
-<p><img src="images/cookbook_cover_300x360x256.png"
-style="border:1px solid grey;" /></p>
-</div>
-<div id="advice-for-beginners" class="slide section level1">
-<h1>Advice for Beginners</h1>
-<ol style="list-style-type: decimal">
-<li>Try to get <strong>working</strong> code</li>
-<li>Focus on <strong>adapting code</strong> rather than starting from
-scratch</li>
-<li>Pay attention to <strong>syntax</strong></li>
-<li>Use meaningful <strong>variable names</strong></li>
-<li>Ask for help for <strong>cryptic error messages</strong></li>
-<li><strong>Comment your code</strong> liberally</li>
-</ol>
+<p><br />
+</p>
 </div>
 <div id="workshop-materials" class="slide section level1">
 <h1>Workshop Materials</h1>
 <p><strong>Slides</strong></p>
 <div class="compact">
 <ul>
-<li><a href="https://ucanr-gis.github.io/rspatial_scgis23"
-target="_blank">https://ucanr-gis.github.io/rspatial_scgis23</a></li>
+<li><a href="https://ucanr-igis.github.io/rspatial_scgis23"
+target="_blank">https://ucanr-igis.github.io/rspatial_scgis23</a></li>
 </ul>
 </div>
 <div class="indented3">
@@ -249,15 +230,18 @@ F: toggle display of the footer<br />
 C: Show table of contents</p>
 </div>
 </div>
-<p><strong>Practice</strong></p>
+<p><br />
+</p>
+<p><strong>Exercises</strong></p>
 <div class="compact">
 <ul>
-<li>short exercises in slides (copy-paste starter code to RStudio)<br />
+<li>short examples in slides (copy-paste to RStudio)<br />
 </li>
-<li>R Notebooks<br />
-</li>
+<li>scripts and notebooks in Exercises folder</li>
 </ul>
 </div>
+<p><br />
+</p>
 <p><strong>Community Forum</strong></p>
 <div class="compact">
 <ul>
@@ -275,37 +259,49 @@ rel="noopener">https://etherpad.wikimedia.org/p/rspatial-scgis23</a></li>
 </ul>
 </div>
 </div>
+<p><br />
+</p>
 <p><strong>Virtual Environment</strong></p>
 <div class="compact">
 <ul>
-<li><p><a href="https://posit.cloud/content/5424742xxxx" target="_blank"
-rel="noopener">https://posit.cloud/content/5424742xxxx</a></p></li>
+<li><p><a href="https://posit.cloud/content/6309720" target="_blank"
+rel="noopener">https://posit.cloud/content/6309720</a></p></li>
 <li><p>Data and packages pre-installed!</p></li>
 </ul>
 </div>
+<p><br />
+</p>
 <p><strong>Data</strong></p>
 <div class="compact">
 <ul>
-<li>Posit Cloud: see ‘data’ directory in Notebooks folder<br />
-</li>
-<li>RStudio Desktop: download zip from <a
+<li>Posit Cloud - see ‘Data’ directory under Exercises</li>
+<li>RStudio Desktop: download zip <a
 href="https://ucdavis.box.com/shared/static/5l54mb4mtn2thw77ju4xefygnctqjk2o.zip"
-target="_blank"
-rel="noopener">https://ucdavis.box.com/shared/static/5l54mb4mtn2thw77ju4xefygnctqjk2o.zip</a></li>
+target="_blank" rel="noopener">here</a></li>
 </ul>
 </div>
+<p><br />
+</p>
 <p><strong>Other Resources &amp; Cheatsheets</strong></p>
 <div class="compact">
 <ul>
-<li>see <a href="../resources.html">Resources.html</a></li>
+<li>see <a href="../resources.html">Resources.html</a><br />
+</li>
+<li>ChatGPT</li>
 </ul>
 </div>
+<p><br />
+</p>
+<p><strong>Everything!</strong></p>
+<div class="compact">
+<ul>
+<li><a href="https://github.com/ucanr-igis/rspatial_scgis23"
+target="_blank"
+rel="noopener">https://github.com/ucanr-igis/rspatial_scgis23</a><br />
+</li>
+<li>(wait a few days after the workshop)</li>
+</ul>
 </div>
-<div id="sample-data" class="slide section level1">
-<h1>Sample Data</h1>
-<p><img src="./images/yosem_leaflet_400x330.png" /></p>
-<p><a href="../datasets.html" target="_blank">Yosemite National Park
-data</a></p>
 <p>
 <br/>
 <hr/>
