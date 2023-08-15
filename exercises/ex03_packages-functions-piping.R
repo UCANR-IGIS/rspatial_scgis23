@@ -47,11 +47,8 @@ head(archbold.apple)
 # Rewrite the following as a piped expression
 
 x1 <- seq(from = 1, to = 7, length.out = 500)
-x2 <- round(x1, 2) 
+x2 <- round(x1, digits = 2) 
 x3 <- sum(x2)
-x4 <- sqrt(x3)
-x4
-
 
 ## CHALLENGE: 
 

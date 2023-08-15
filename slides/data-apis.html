@@ -1,0 +1,900 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Getting Data from APIs  " />
+  <meta name="copyright" content="<span class='footer-right'><a href='../acknowledgements.html'>Acknowledgements</a></span><span class='footer-right'><a href=' https://etherpad.wikimedia.org/p/rspatial-scgis23 ' target='_blank'>Forum</a></span><span class='footer-right'><a href=' https://ucanr-igis.github.io/rspatial_scgis23 '> https://ucanr-igis.github.io/rspatial_scgis23 </a></span><span class='footer-right'><a href='../index.html'>Home</a></span><span class='footer-subtitle'> Intro to Spatial Data Analysis with R </span>"/>
+  <meta name="font-size-adjustment" content="2"/>
+  <title>Intro to Spatial Data Analysis with R  SCGIS 2023 Annual Conference</title>
+  <style type="text/css">
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+            pre > code.sourceCode { white-space: pre; position: relative; }
+            pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+            pre > code.sourceCode > span:empty { height: 1.2em; }
+            .sourceCode { overflow: visible; }
+            code.sourceCode > span { color: inherit; text-decoration: inherit; }
+            div.sourceCode { margin: 1em 0; }
+            pre.sourceCode { margin: 0; }
+            @media screen {
+            div.sourceCode { overflow: auto; }
+            }
+            @media print {
+            pre > code.sourceCode { white-space: pre-wrap; }
+            pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+            }
+            pre.numberSource code
+              { counter-reset: source-line 0; }
+            pre.numberSource code > span
+              { position: relative; left: -4em; counter-increment: source-line; }
+            pre.numberSource code > span > a:first-child::before
+              { content: counter(source-line);
+                position: relative; left: -1em; text-align: right; vertical-align: baseline;
+                border: none; display: inline-block;
+                -webkit-touch-callout: none; -webkit-user-select: none;
+                -khtml-user-select: none; -moz-user-select: none;
+                -ms-user-select: none; user-select: none;
+                padding: 0 4px; width: 4em;
+                color: #aaaaaa;
+              }
+            pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+            div.sourceCode
+              {   }
+            @media screen {
+            pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+            }
+            code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+            code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+            code span.at { color: #7d9029; } /* Attribute */
+            code span.bn { color: #40a070; } /* BaseN */
+            code span.bu { color: #008000; } /* BuiltIn */
+            code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+            code span.ch { color: #4070a0; } /* Char */
+            code span.cn { color: #880000; } /* Constant */
+            code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+            code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+            code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+            code span.dt { color: #902000; } /* DataType */
+            code span.dv { color: #40a070; } /* DecVal */
+            code span.er { color: #ff0000; font-weight: bold; } /* Error */
+            code span.ex { } /* Extension */
+            code span.fl { color: #40a070; } /* Float */
+            code span.fu { color: #06287e; } /* Function */
+            code span.im { color: #008000; font-weight: bold; } /* Import */
+            code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+            code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+            code span.op { color: #666666; } /* Operator */
+            code span.ot { color: #007020; } /* Other */
+            code span.pp { color: #bc7a00; } /* Preprocessor */
+            code span.sc { color: #4070a0; } /* SpecialChar */
+            code span.ss { color: #bb6688; } /* SpecialString */
+            code span.st { color: #4070a0; } /* String */
+            code span.va { color: #19177c; } /* Variable */
+            code span.vs { color: #4070a0; } /* VerbatimString */
+            code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+          </style>
+  <style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <link href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACkUlEQVQ4jX2SW0jTcRTHTzNyeZlh6lqmm3POdNPC6SxSEzaqafkykOFoIxTDWpKRFV6iQMNLFyMSsQvUW0WORc2WWBmGKEGZXUyz0NrmNmfa1PYgfHsQ1v5oHjgvX875/M45vy/R8mDJ9caxrFIL5CUWJB00Q9n+7Q+l1BetUMuMTL3JpTB0QVnejd1Hu9DQ60G5eQbqB7PIvj0L2bUZ0KZzghWbs0o7Fx3Tc/B6vStm6+g0wrQvIKh2gKKyUxnNSZoO685SC1YDeL1e9Ll+Ia7WCd5pJ4hojQ8g1nViezETYBqZx93BOdwa9jAgsdUT4J6ZQqC6f4GIiLYU9/RzNWYIdU9hd/8rLjN7UGT8DbWROVVMlQsBBWas142DiIikdfbFMF0POIVm2NzM1zwLS+mvcSsnEajpBSv/8RIgucGJ1EYXEs+NwjrlWfUGMee/Y2PFJIJLrFibex8kOsahhCYnUlpnIL1kh9X9/yMKG2yIOOlAsPYnAveZsE75EEQUQLwTwy5Rsxvx9UxApKEPEYY+BiSizA623oaggkdgq4xLKwRLq7i8sy6EFlpg8wNEVwyAd3wAbZ8cPu3CazeCC/sRojYjaL8Jvm8MPWLDBm03A8CveQ9+7RBia4cYU4QfeokwzTOwc6/4OzKXHap/C5ufD0RNo0i4OAZR81dcnnD69Mp3PxBe9GRkuZdFKk7sqTcQ132EpGUMydetSLnpgOSGHVtbxpHU9AX8mkFEG55/ZrjQL1h82V6esPLVh8Sr40i940J6xzzS7s1C0m6HqHEEiTnatgT5gcPijHxltFwhjpRIQpZjBAJ2lFTBFW5TiOPT8mXx6apdcRl5OaJM1Q6hLC9ls3RPTLgok0NELCKiv02kPqt/O1MZAAAAAElFTkSuQmCC" rel="icon" type="image/x-icon" />
+  <meta name="robots" content="noindex,nofollow"/>
+  <script language="javascript" type="text/javascript">
+  function TriShowHide(shID) {
+    shIDspan = shID + "span";
+    shIDdiv = shID + "div";
+    if (document.getElementById(shIDdiv).style.display != 'block') {
+      document.getElementById(shIDdiv).style.display = 'block';
+      txtSpan = "&#9660;";
+    } else {
+      document.getElementById(shIDdiv).style.display = 'none';
+      txtSpan = "&#9654;";
+    }
+    document.getElementById(shIDspan).innerHTML = txtSpan + " ";
+  }
+  function showHide(shID) {
+    if (shID=="soln-show-all") {
+      var allAnswerCode = document.getElementsByClassName("answer-code");
+      for (i = 0; i < allAnswerCode.length; i++) {
+          allAnswerCode[i].style.display = 'block';
+      }
+    } else if (shID=="soln-hide-all") {
+      var allAnswerCode = document.getElementsByClassName("answer-code");
+      for (i = 0; i < allAnswerCode.length; i++) {
+          allAnswerCode[i].style.display = 'none';
+      }
+    } else if (shID=="hints-show-all") {
+      var allAnswerCode = document.getElementsByClassName("hint");
+      for (i = 0; i < allAnswerCode.length; i++) {
+          allAnswerCode[i].style.display = 'block';
+      }
+    } else if (shID=="hints-hide-all") {
+      var allAnswerCode = document.getElementsByClassName("hint");
+      for (i = 0; i < allAnswerCode.length; i++) {
+          allAnswerCode[i].style.display = 'none';
+      }
+    } else {
+      if (document.getElementById(shID)) {
+        if (document.getElementById(shID).style.display != 'block') {
+          document.getElementById(shID).style.display = 'block';
+        } else {
+          document.getElementById(shID).style.display = 'none';
+        }
+      }
+    }
+  }
+  function CopyToClipboard(containerid) {
+  if (document.selection) {
+      var range = document.body.createTextRange();
+      range.moveToElementText(document.getElementById(containerid));
+      range.select().createTextRange();
+      document.execCommand("copy");
+  } else if (window.getSelection) {
+      var range = document.createRange();
+      range.selectNode(document.getElementById(containerid));
+      window.getSelection().addRange(range);
+      document.execCommand("copy");
+      // alert("text copied")
+  }}
+  </script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-163964617-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-163964617-1');
+  </script>
+  <script src="lib/header-attrs-2.23/header-attrs.js"></script>
+  <link href="lib/slidy-2/styles/slidy.css" rel="stylesheet" />
+  <script src="lib/slidy-2/scripts/slidy.js"></script>
+  <script src="lib/slidy_shiny-1/slidy_shiny.js"></script>
+  <script src="lib/clipboard-1.7.1/clipboard.min.js"></script>
+  <link href="lib/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+  <link href="lib/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+  <script src="lib/klippy-0.0.0.9500/js/klippy.min.js"></script>
+  <script src="lib/kePrint-0.0.1/kePrint.js"></script>
+  <link href="lib/lightable-0.0.1/lightable.css" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+   href="../css/slidy_styles.css" />
+  <meta name="duration" content="0" />
+</head>
+<body>
+<script type="text/javascript">w3c_slidy.mouse_click_enabled = false;</script>
+<div class="slide titlepage">
+  <h1 class="title"><span class="course-title">Intro to Spatial Data
+Analysis with R </span><br/><span class="course-subtitle">SCGIS 2023
+Annual Conference</span></h1>
+  <p class="author">
+Getting Data from APIs
+<br/><img src='images/data-transfer_252x200x256.png'/>
+  </p>
+</div>
+<div id="apis" class="slide section level1">
+<h1>APIs</h1>
+<script>
+  addKlippy('left', 'top', 'auto', '1', 'Copy code', 'Copied!');
+</script>
+<p>API = <em>Application Programming Interface</em>.</p>
+<p>It is both a translator and a messenger between two different
+programs.</p>
+<p>Common Uses of APIs</p>
+<div class="indented2">
+<ul>
+<li>call libraries written in C from R</li>
+<li>request data and have it returned in a known format</li>
+<li>access ‘big’ database and/or computing power (e.g., geocoding)</li>
+</ul>
+</div>
+</div>
+<div id="importing-data-from-the-cloud" class="slide section level1">
+<h1>Importing Data from the Cloud</h1>
+<p>There are four general approaches to importing data directly into
+R:</p>
+<div class="compact">
+<ol style="list-style-type: decimal">
+<li><p>Data packages</p></li>
+<li><p>Import functions that take URLs</p></li>
+<li><p>API packages</p></li>
+<li><p>Write your own download code</p></li>
+</ol>
+</div>
+</div>
+<div id="option-1-data-packages" class="slide section level1">
+<h1>Option 1: Data Packages</h1>
+<p>Packages that primarily contain datasets are commonly known as
+<em>data packages</em>.</p>
+<p>When you install the package, you’re actually downloading the data to
+your hard drive. This makes them convenient - provided you have enough
+hard drive space!</p>
+<h3 id="examples">Examples:</h3>
+<div class="compact">
+<ul>
+<li><p><a href="https://github.com/Nowosad/spData" target="_blank"
+rel="noopener">spData</a>. Various datasets for spatial analysis.<br />
+</p></li>
+<li><p><a href="https://github.com/Nowosad/spDataLarge" target="_blank"
+rel="noopener">spDataLarge</a>. Large datasets for spatial analysis, to
+accompany the <a href="https://geocompr.github.io/">Geocomputation with
+R</a> book.</p></li>
+<li><p><a href="https://lincolnmullen.com/software/usaboundaries/"
+target="_blank" rel="noopener">USAboundaries</a>. Current and historical
+boundaries for US cities, counties, and states.<br />
+</p></li>
+</ul>
+</div>
+<p><br />
+</p>
+<div class="tip">
+<p>CRAN doesn’t like to host data packages because they can be rather
+large. So you may have to install them from another repository such as
+GitHub, Bioconductor, etc.</p>
+</div>
+</div>
+<div id="option-2-use-import-functions-that-accept-urls"
+class="slide section level1">
+<h1>Option 2: Use Import Functions that Accept URLs</h1>
+<p>Many functions that import data from local files can also be used to
+download data from online sources, provided the URL returns data in a
+standard format. Examples:</p>
+<h3 id="example-import-a-geojson-file">Example: Import a GeoJSON
+file:</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>sf_nb <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">read_sf</span>(<span class="st">&quot;https://data.sfgov.org/resource/xfcw-9evu.geojson&quot;</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">plot</span>(sf_nb <span class="sc">%&gt;%</span> <span class="fu">st_geometry</span>(), <span class="at">main =</span> <span class="st">&quot;San Francisco Neighborhoods&quot;</span>)</span></code></pre></div>
+<p><img src="data-apis_files/figure-slidy/import_geojson-1.png" width="768" /></p>
+<h3 id="example-import-a-csv-file-from-github">Example: Import a csv
+file from GitHub</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>ca_breweries_df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/ucanr-igis/rspatial_data/master/data/ca_breweries.csv&quot;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="fu">head</span>(ca_breweries_df)</span></code></pre></div>
+<pre><code>##                                   Name                     Address             City State          Phone    Type
+## 1              10 Mile Brewing Company            1136 E Willow St      Signal Hill    CA (562) 612-1255 Brewery
+## 2                    101 North Brewing       1304 Scott St Suite D         Petaluma    CA (707) 778-8384 Brewery
+## 3                           14 Cannons 31125 Via Colinas Suite 907 Westlake Village    CA (818) 652-6971 Brewery
+## 4 21st Amendment Brewery - San Leandro            2010 Williams St      San Leandro    CA                Brewery
+## 5                2Kids Brewing Company         8680 Miralani Drive        San Diego    CA (858) 480-5437 Brewery
+## 6             32 North Brewing Company 8655 Production Ave Suite A       Sand Diego    CA   619-363-2622 Brewery</code></pre>
+<p><br />
+</p>
+<div class="tip">
+<p>If you need to download a file programmatically, use
+<code>download.file()</code>.</p>
+<p>If you need to download a zip file, you can download it to a temp
+file, unzip the contents where they should go (with
+<code>unzip()</code>), then delete the temp file.</p>
+</div>
+<p><br />
+</p>
+</div>
+<div id="preview-pages-vs-direct-urls" class="slide section level1">
+<h1>Preview Pages vs Direct URLs</h1>
+<p>Many data providers have a ‘preview’ page for a dataset, and
+(hopefully) a Direct Link.</p>
+<p>You want to use the Direct Link with functions that accept a URL.</p>
+<p><br />
+</p>
+<p><img
+src="images/socrata-preview-page-with-direct-link_800x634x256.png" /></p>
+<p><br />
+</p>
+<p><img src="images/box_preview-with-link_1000x550x256.png" /></p>
+<div class="tip">
+<p>To get the direct link for a file on Google Drive, visit:<br />
+<a href="https://buildbrothers.com/gdrive-generator/"
+class="uri">https://buildbrothers.com/gdrive-generator/</a></p>
+</div>
+</div>
+<div id="option-3-api-packages" class="slide section level1">
+<h1>Option 3: API Packages</h1>
+<p>The the next best option is to find an API package that is
+<strong>designed to download data</strong>.</p>
+<p>API Packages have custom functions to download specific datasets from
+specific online data portals.</p>
+<div class="infobox">
+<p><strong>Example: tidycensus</strong></p>
+<p><code>tidycensus</code> makes it easy to grab census data. The
+following command will download median household income from the
+American Community Survey by census tracks in San Francisco County, and
+return the results as a tibble.</p>
+<div class="indented1 indented1r">
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="do">## Get median household income from the American Community Survey </span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="do">## by census tracks in San Francisco County</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="fu">library</span>(tidycensus)</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>andys_api_key <span class="ot">&lt;-</span> <span class="fu">readLines</span>(<span class="st">&quot;~/My Keys/census-api-key.txt&quot;</span>, <span class="at">n=</span><span class="dv">1</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>tidycensus<span class="sc">::</span><span class="fu">census_api_key</span>(andys_api_key)</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>median_hhinc_tbl <span class="ot">&lt;-</span> tidycensus<span class="sc">::</span><span class="fu">get_acs</span>(<span class="at">state =</span> <span class="st">&quot;CA&quot;</span>, </span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>                                     <span class="at">county =</span> <span class="st">&quot;San Francisco&quot;</span>, </span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>                                     <span class="at">geography =</span> <span class="st">&quot;tract&quot;</span>, </span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>                                     <span class="at">variables =</span> <span class="st">&quot;B19013_001&quot;</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>median_hhinc_tbl <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 5
+##   GEOID       NAME                                                  variable   estimate   moe
+##   &lt;chr&gt;       &lt;chr&gt;                                                 &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt;
+## 1 06075010101 Census Tract 101.01, San Francisco County, California B19013_001    78661 21717
+## 2 06075010102 Census Tract 101.02, San Francisco County, California B19013_001       NA    NA
+## 3 06075010201 Census Tract 102.01, San Francisco County, California B19013_001   159647 47139
+## 4 06075010202 Census Tract 102.02, San Francisco County, California B19013_001   192500 41795
+## 5 06075010300 Census Tract 103, San Francisco County, California    B19013_001   136643 27043
+## 6 06075010401 Census Tract 104.01, San Francisco County, California B19013_001   115170 39013</code></pre>
+</div>
+</div>
+<!----- infobox ------>
+<h2 id="advantages">Advantages</h2>
+<p>Benefits of using an API package:</p>
+<div class="compact">
+<ul>
+<li>download <strong>only the data you need</strong>, when you need
+it</li>
+<li><strong>user-friendly R functions</strong> help you select the data
+you’re interested in</li>
+<li>depending on the API, you may be able to <strong>filter data on the
+server</strong></li>
+<li>results are usually returned as a <strong>common R data
+type</strong> (e.g., sf data frame, raster, etc.)</li>
+</ul>
+</div>
+<p><br />
+</p>
+<p>Example API packages:</p>
+<div class="compact">
+<ul>
+<li><code>raster::getdata()</code></li>
+<li><a href="https://github.com/walkerke/tigris" target="_blank"
+rel="noopener"><code>tidycensus</code></a><br />
+</li>
+<li><a href="https://github.com/walkerke/tigris" target="_blank"
+rel="noopener"><code>tigris</code></a><br />
+</li>
+<li><a href="http://gshs-ornl.github.io/wbstats/" target="_blank"
+rel="noopener"><code>wbstats</code></a></li>
+</ul>
+</div>
+<p><br />
+</p>
+<div class="tip">
+<p>There are <strong>100s</strong> of ‘niche’ API Packages in the R
+universe. For example <a
+href="https://cran.r-project.org/web/packages/twitteR/" target="_blank"
+rel="noopener">twitteR</a> is an R package which provides access to the
+Twitter API.</p>
+<p>To search for an API package for a specific data source, try Google
+or search <a
+href="https://cran.r-project.org/web/packages/available_packages_by_name.html"
+target="_blank" rel="noopener">CRAN packages by name</a>.</p>
+<p>See also: <a href="https://ropensci.org/packages/data-access/"
+target="_blank" rel="noopener"><em>ROpenSci Data Access
+Packages</em></a></p>
+</div>
+<!----- https://rviews.rstudio.com/2017/11/01/r-data-packages/ ---->
+<!----
+Example:
+
+file:///D:/Workshops/R-Spatial/rspatial_mod/outputs/rspatial_bgs20/docs/slides/11_mapping-covid19.html#(5) (TIGRIS EXAMPLE)
+
+---->
+</div>
+<div id="api-package-sampler" class="slide section level1">
+<h1>API Package Sampler</h1>
+<h2 id="raster">Raster</h2>
+<p><code>raster::getData()</code> can download the following datasets
+directly into R:</p>
+<div class="indented2">
+<ul>
+<li><strong>countries</strong> - polygons for all countries<br />
+</li>
+<li><strong>GADM</strong> - a database of global administrative
+boundaries (<a href="http://www.gadm.org"
+target="_blank">source</a>)</li>
+<li><strong>SRTM</strong> - hole-filled CGIAR-SRTM (90 m
+resolution)<br />
+</li>
+<li><strong>alt</strong> - altitude (elevation) aggregated from SRTM 90
+m resolution data between -60 and 60 latitude.</li>
+<li><strong>worldclim</strong> - a database of global interpolated
+climate data</li>
+</ul>
+</div>
+<p>To specify which area you want, you either pass a country
+abbreviation (<em>alt</em> or <em>GADM</em>) or a latitude-longitude
+coordinate (<em>SRTM</em> and <em>worldclim</em>).</p>
+<div class="tip">
+<p>There’s another <code>getData()</code> function in another package,
+so always use the <code>raster::getData()</code> prefix.</p>
+<p>To see the three-character ISO3 codes for each country, run
+<code>raster::getData('ISO3')</code></p>
+<p>Downloads are cached by default. If you don’t want the temporary
+files saved, pass <code>download=FALSE</code>.</p>
+</div>
+<h3 id="example-make-a-map-of-zambia-with-data-from-the-cloud">Example:
+Make a map of Zambia with data from the cloud</h3>
+<p>Let’s download and plot the District boundaries and DEM for
+Zambia.</p>
+<div class="indented2 indented2r">
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>zmb_alt <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">getData</span>(<span class="at">name=</span><span class="st">&quot;alt&quot;</span>, <span class="at">country=</span><span class="st">&quot;ZMB&quot;</span>, <span class="at">mask=</span><span class="st">&quot;TRUE&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning in raster::getData(name = &quot;alt&quot;, country = &quot;ZMB&quot;, mask = &quot;TRUE&quot;): getData will be removed in a future version of raster
+## . Please use the geodata package instead</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>zmb_districts <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">getData</span>(<span class="at">name=</span><span class="st">&quot;GADM&quot;</span>, <span class="at">country=</span><span class="st">&quot;ZMB&quot;</span>, <span class="at">level=</span><span class="dv">2</span>)</span></code></pre></div>
+<pre><code>## Warning in raster::getData(name = &quot;GADM&quot;, country = &quot;ZMB&quot;, level = 2): getData will be removed in a future version of raster
+## . Please use the geodata package instead</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="fu">class</span>(zmb_alt); <span class="fu">class</span>(zmb_districts)</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="fu">plot</span>(zmb_alt, <span class="at">main=</span><span class="st">&quot;Districts of Zambia&quot;</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="fu">plot</span>(zmb_districts, <span class="at">col=</span><span class="cn">NA</span>, <span class="at">border=</span><span class="st">&quot;black&quot;</span>, <span class="at">add=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] &quot;RasterLayer&quot;
+## attr(,&quot;package&quot;)
+## [1] &quot;raster&quot;
+## [1] &quot;SpatialPolygonsDataFrame&quot;
+## attr(,&quot;package&quot;)
+## [1] &quot;sp&quot;</code></pre>
+<p><img src="data-apis_files/figure-slidy/imp_zm-1.png" width="768" style="display: block; margin: auto;" /></p>
+</div>
+<div class="tryit">
+<p>Using the <code>raster::getData()</code> to plot the administrative
+boundaries of a country of your choice. See what the different values of
+the <code>level</code> argument return.</p>
+</div>
+<h2 id="inaturalist">iNaturalist</h2>
+<p><img src="images/rinat_hex_121x140.png"
+style="float:right; width:121px; height:140px; padding:5px;" /></p>
+<p><a href="https://www.inaturalist.org/" target="_blank"
+rel="noopener">iNaturalist</a> is a global community of naturalists that
+use the iNaturalist app to share observations and communicate. Over 73m
+observations to date!</p>
+<p>You can access iNaturalist data via the <a
+href="https://docs.ropensci.org/rinat/" target="_blank"
+rel="noopener"><code>rinat</code></a> API client package.</p>
+<div class="indented2 indented2r" style="clear:both;">
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="do">## install.packages(&quot;rinat&quot;)</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="fu">library</span>(rinat)</span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co"># Define spatial boundaries</span></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>sample_bounds <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">38.44047</span>, <span class="sc">-</span><span class="dv">125</span>, <span class="fl">40.86652</span>, <span class="sc">-</span><span class="fl">121.837</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a><span class="do">## Get observations (first 100)</span></span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a>deer_df <span class="ot">&lt;-</span> <span class="fu">get_inat_obs</span>(<span class="at">query =</span> <span class="st">&quot;Mule Deer&quot;</span>, <span class="at">bounds =</span> sample_bounds)</span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a><span class="do">## Plot results</span></span>
+<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a><span class="fu">plot</span>(deer_df<span class="sc">$</span>longitude, deer_df<span class="sc">$</span>latitude)</span></code></pre></div>
+<p><img src="data-apis_files/figure-slidy/rinat-1.png" width="768" /></p>
+</div>
+<h2 id="caladaptr">caladaptR</h2>
+<p><img src="images/caladaptr-logo-static_121x140.png"
+style="float:right; width:173px; height:200px; padding:15px;" /></p>
+<p><a href="https://ucanr-igis.github.io/caladaptr/" target="_blank"
+rel="noopener">caladaptR</a> provides functions to directly import
+climate data from Cal-Adapt, a climate data portal for the western USA.
+The data come in as data frames or rasters.</p>
+<p>To retrieve data, you first construct a “request object”, which is
+like an order form. This gets fed into a function that fetches data (<a
+href="https://ucanr-igis.github.io/caladaptr/" target="_blank"
+rel="noopener">more info</a>).</p>
+<div class="indented2 indented2r" style="clear:both;">
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="fu">library</span>(caladaptr)</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>sac_tasmax_cap <span class="ot">&lt;-</span> <span class="fu">ca_loc_pt</span>(<span class="at">coords =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">121.4687</span>, <span class="fl">38.5938</span>)) <span class="sc">%&gt;%</span>   <span class="do">## specify a location</span></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>  <span class="fu">ca_gcm</span>(gcms[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>]) <span class="sc">%&gt;%</span>                                           <span class="do">## specify climate model(s)</span></span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>  <span class="fu">ca_scenario</span>(<span class="fu">c</span>(<span class="st">&quot;rcp45&quot;</span>,<span class="st">&quot;rcp85&quot;</span>)) <span class="sc">%&gt;%</span>                             <span class="do">## select emission scenarios(s)</span></span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>  <span class="fu">ca_cvar</span>(<span class="fu">c</span>(<span class="st">&quot;tasmax&quot;</span>)) <span class="sc">%&gt;%</span>                                        <span class="do">## select climate variables</span></span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>  <span class="fu">ca_period</span>(<span class="st">&quot;year&quot;</span>) <span class="sc">%&gt;%</span>                                           <span class="do">## select a temporal aggregation period</span></span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a>  <span class="fu">ca_years</span>(<span class="at">start =</span> <span class="dv">2040</span>, <span class="at">end =</span> <span class="dv">2070</span>)                              <span class="do">## select start and end dates</span></span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a>sac_tasmax_tbl <span class="ot">&lt;-</span> <span class="fu">ca_getvals_tbl</span>(sac_tasmax_cap, <span class="at">quiet =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">temp_f =</span> units<span class="sc">::</span><span class="fu">set_units</span>(val, degF))</span>
+<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> sac_tasmax_tbl, </span>
+<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">as.Date</span>(dt), <span class="at">y =</span> <span class="fu">as.numeric</span>(temp_f))) <span class="sc">+</span></span>
+<span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">color=</span>gcm)) <span class="sc">+</span></span>
+<span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a>  <span class="fu">facet_grid</span>(scenario <span class="sc">~</span> .) <span class="sc">+</span></span>
+<span id="cb13-18"><a href="#cb13-18" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Annual Maximum Temperature for Sacramento&quot;</span>, <span class="at">x =</span> <span class="st">&quot;year&quot;</span>, <span class="at">y =</span> <span class="st">&quot;temp (F)&quot;</span>)</span></code></pre></div>
+<p><img src="data-apis_files/figure-slidy/caladpatr_ex-1.png" width="768" /></p>
+</div>
+<h2 id="feddata">FedData</h2>
+<p><a href="https://github.com/ropensci/FedData" target="_blank"
+rel="noopener">FedData</a> is an R package implementing functions to
+automate downloading geospatial data available from several federated
+data sources, including:</p>
+<div class="indented2 singlespace">
+<ul>
+<li>USGS National Elevation Dataset (NED)<br />
+</li>
+<li>USGS National Hydrography Dataset (NHD)<br />
+</li>
+<li>USDA Soil Survey Geographic database (SSURGO)<br />
+</li>
+<li>NOAA Global Historical Climatology Network (GHCN)<br />
+</li>
+<li>Oak Ridge National Lab gridded estimates of daily weather parameters
+(Daymet)</li>
+<li>NOAA International Tree Ring Data Bank (ITRDB)<br />
+</li>
+<li>National Land Cover Database (NLCD)<br />
+</li>
+<li>NASS Cropland Data Layer<br />
+</li>
+</ul>
+</div>
+<p><br />
+</p>
+</div>
+<div id="exercise-map-inaturalist-observations-with-rinat"
+class="slide section level1">
+<h1>Exercise: Map iNaturalist Observations with <code>rinat</code></h1>
+<p><a href='https://raw.githubusercontent.com/ucanr-igis/rspatial_scgis23/master/exercises/nb_rinat.Rmd' target='_blank'>nb_rinat.Rmd</a></p> <div class='nb_desc'>Query and map observations from iNaturalist</div> <p style='font-size:80%;'><a href='https://ucanr-igis.github.io/rspatial_scgis23/exercises/nb_rinat.nb.html' target='_blank' rel='noopener' style='color:#8993d3;'>preview notebook</a> | <a href='https://ucanr-igis.github.io/rspatial_scgis23/exercises/nb_rinat_ans.nb.html' target='_blank' style='color:#8993d3;'>answer key</a></p>
+<!------
+# Notebook Exercise (outline)
+
+Example of bundled data example: USAboundaries
+
+Download roads from tigris - include a spatial query if possible
+
+Download a zip into temp space. Unzip it. 
+
+---->
+</div>
+<div id="option-4-write-your-own-download-code"
+class="slide section level1">
+<h1>Option 4: Write your own download code</h1>
+<p>When all else fails, you can write your own code to download data and
+import it into R.</p>
+<p>Tools of the trade include:</p>
+<table class="tbl_compact table" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+Function
+</th>
+<th style="text-align:left;">
+Use
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-family: monospace;">
+download.file()
+</td>
+<td style="text-align:left;">
+download a file from a URL
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-family: monospace;">
+tempdir()
+</td>
+<td style="text-align:left;">
+return the temporary folder where you can put files temporarily
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-family: monospace;">
+unlink()
+</td>
+<td style="text-align:left;">
+delete files
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-family: monospace;">
+unzip()
+</td>
+<td style="text-align:left;">
+unzip files
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-family: monospace;">
+httr
+</td>
+<td style="text-align:left;">
+submit GET and POST request to a server to request data
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-family: monospace;">
+jsonlite
+</td>
+<td style="text-align:left;">
+convert strings in JSON syntax to lists
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-family: monospace;">
+purrr
+</td>
+<td style="text-align:left;">
+convert lists to data frames
+</td>
+</tr>
+</tbody>
+</table>
+<div class="infobox">
+<p><strong>Web Scraping</strong></p>
+<p>An alternative approach to downloading data from the cloud is known
+as ‘web scraping’.</p>
+<p>This is far less desirable than an API because it is i) inefficient,
+and ii) easily broken. But if the data source doesn’t support an API,
+web scraping may be your only option.</p>
+</div>
+</div>
+<div id="importing-data-from-arcgis-online-arcgis-enterprise"
+class="slide section level1">
+<h1>Importing Data from ArcGIS Online &amp; ArcGIS Enterprise</h1>
+<p><img src="images/agol-logo_140x140x256.png"
+style="float:right; width:140px; height:140px; padding:10px;" /></p>
+<p>Feature classes on <strong>ArcGIS.com</strong> or <strong>ArcGIS
+Enterprise</strong> may be directly imported into R if the layer is
+public, or you have an ArcGIS license that gives you access.</p>
+<div class="indented2 indented2r">
+<table class="tbl_compact table" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+Configuration
+</th>
+<th style="text-align:left;">
+R Download
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+public with JSON enabled
+</td>
+<td style="text-align:left;">
+import with <a href="https://github.com/yonghah/esri2sf" target="_blank"
+rel="noopener"><code>esri2sf</code></a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+not public but accessible from AGOL or an ArcGIS portal using your
+ArcGIS account
+</td>
+<td style="text-align:left;">
+import using the R-ArcGIS Bridge
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="infobox">
+<p>ArcGIS.com and ArcGIS Portal generally support
+<strong>server-side</strong> querying (both attribute and spatial). This
+means you can download <strong>just the features you need</strong>!</p>
+<p>See also:</p>
+<div class="compact">
+<ul>
+<li><a href="r-arcgis.html" target="_blank" rel="noopener">Connecting R
+&amp; ArcGIS</a><br />
+</li>
+<li><a href="https://cran.r-project.org/web/packages/arcpullr/"
+target="_blank" rel="noopener">arcpullr</a><br />
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="google-drive-and-google-sheets" class="slide section level1">
+<h1>Google Drive and Google Sheets</h1>
+<p><img src="images/googledrive_86x100x256.png" /><br />
+<a href="https://googledrive.tidyverse.org/"
+class="uri">https://googledrive.tidyverse.org/</a></p>
+<p><br />
+</p>
+<p><img src="images/googlesheets4_86x100x256.png" /><br />
+<a href="https://googlesheets4.tidyverse.org/"
+class="uri">https://googlesheets4.tidyverse.org/</a></p>
+</div>
+<div id="api-authentication" class="slide section level1">
+<h1>API Authentication</h1>
+<p>Many APIs require you to register for access. This allows them to
+track which users are submitting queries and manage demand.</p>
+<p>If you submit too many queries too quickly, you might be rate-limited
+or your requests may be temporarily blocked!</p>
+<p>In some cases, a data provider may require authentication as part of
+a paid subscription program.</p>
+<p><br />
+</p>
+<h2 id="api-keys">API Keys</h2>
+<p>A common way of providing authentication is through <em>API keys</em>
+or <em>tokens</em>. These are essentially like private passwords
+specifically for accessing data through an API.</p>
+<p>Many API packages have a function to save your API key in memory, so
+you don’t have to type it in every time you fetch some data.</p>
+<p>For example, the Census Bureau requires users to <a
+href="https://api.census.gov/data/key_signup.html" target="_blank"
+rel="noopener">create an account</a> (free) and generate an API key. The
+excellent <code>tidycensus</code> package provides a function to enter
+your key before you start making requests for data:</p>
+<div class="indented4 indented2r">
+<pre><code>tidycensus::census_api_key(&quot;05b44067246sdsfsdfqwerty6a615910263ea93&quot;)
+
+## Now we can get data
+get_decennial(geography = &quot;county&quot;, variables = &quot;P005003&quot;, year = 2010,
+                    summary_var = &quot;P001001&quot;, state = &quot;CA&quot;)
+</code></pre>
+</div>
+</div>
+<div id="protecting-your-api-key" class="slide section level1">
+<h1>Protecting your API Key</h1>
+<p>API keys are like passwords that provide access to services that in
+theory (depending on the service) you could be billed for.</p>
+<p>However unlike passwords, API keys are often transmitted
+<em>unencrypted</em> from web pages or scripts like R or Python.
+Careless developers will even hardcode their API key in their HTML code
+or R script, making it very easy to discover.</p>
+<p>There are two things you can do to protect your API key.</p>
+<p><br />
+</p>
+<h3 id="restrict-its-use-andor-period-of-validity">1. Restrict its Use
+and/or Period of Validity</h3>
+<div class="indented2">
+<p>Some cloud platforms (e.g., Google) allow you to <strong>limit an API
+key to specific services</strong> (e.g., just downloading background
+tiles, or just geocoding).</p>
+<p>Some services allow you to limit the the API key to specific
+application(s) (i.e., only calls from <strong>specific IP
+addresses</strong> or domain names will be processed).</p>
+<p>Some services (e.g., ESRI Geocoding Service) allow you to
+<strong>specify an expiration date</strong> on API keys.</p>
+</div>
+<p><br />
+</p>
+<h3 id="dont-put-the-api-key-in-code">2. Don’t Put the API Key in
+Code</h3>
+<div class="indented2">
+<p>Although it’s very convenient to simply paste your API in your code,
+anyone who sees your script will be able to see and potentially use your
+key.</p>
+<div class="indented4 indented2r">
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="do">## Don&#39;t do this!!</span></span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>myKey <span class="ot">&lt;-</span> <span class="st">&quot;R5p7S006s7KsdfV7UYncAqUVxBN7sf2c5p@CgasdfFzoOo5Q&quot;</span></span></code></pre></div>
+</div>
+<p>A better technique is to store your key in a file somewhere where it
+won’t be accidentally shared. Then you read the file in your script,
+saving the key to a variable. It is still unencrypted in memory, so this
+isn’t very secure, but at least it won’t in your code and be
+accidentally shared on GitHub.</p>
+<p>The following commands will read the first line of a text file like
+the one shown below, and save the results to a variable.</p>
+<div class="indented2 indented2r">
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>api_txt_fn <span class="ot">&lt;-</span> <span class="st">&quot;~/my-google-geocode-api.txt&quot;</span>    <span class="do">## File located in &#39;home&#39; folder (My Documents)</span></span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>mykey_google <span class="ot">&lt;-</span> <span class="fu">readLines</span>(api_txt_fn, <span class="at">n=</span><span class="dv">1</span>)     <span class="do">## n=1 read first line only </span></span></code></pre></div>
+</div>
+<p><img src="images/api_text-file.png" /></p>
+</div>
+<!--- indented2 --->
+<p><br />
+</p>
+<div class="tip">
+<p>You can also save your API key as a <code>*.RData</code> file with
+the <code>save()</code> function, the same way you would save any R
+object, and bring it back into R with <code>load()</code>.</p>
+<p>For even better security, save your API keys in your operating
+system’s credential store using the <a
+href="https://r-lib.github.io/keyring/" target="_blank"
+rel="noopener"><code>keyring</code></a> package.</p>
+<p>See also: <a
+href="https://developers.google.com/maps/api-key-best-practices"
+target="_blank"><em>Google API Key Best Practices</em></a></p>
+</div>
+</div>
+<div id="summary" class="slide section level1">
+<h1>Summary</h1>
+<p>Today we saw:</p>
+<div class="compact">
+<ul>
+<li>how to find and use <strong>data packages</strong><br />
+</li>
+<li>examples of <strong>API packages</strong><br />
+</li>
+<li>techniques for writing your own <strong>direct import</strong>
+code<br />
+</li>
+<li>how to protect your <strong>API keys</strong><br />
+</li>
+</ul>
+</div>
+<div class="infobox">
+<p>Resources:</p>
+<p><a
+href="https://cfss.uchicago.edu/notes/application-program-interface/"
+target="_blank" rel="noopener">Using APIs to get data</a></p>
+</div>
+<p>
+<br/>
+<hr/>
+<strong>Next: </strong> <a href="geoprocessing_pt1.html">Geoprocessing
+Pt1</a>
+</p>
+</div>
+
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+</body>
+</html>
