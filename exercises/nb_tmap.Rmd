@@ -121,23 +121,25 @@ Add the campgrounds to the map as little red dots. Hint: you can render point la
 
 ## Make an interactive map
 
+*__Note__: interactive maps created by tmap can cause problems when you save a R Notebook to HTML. It is recommended that you run the following code in an R script rather than a Notebook.*
+
 We can switch to 'interactive map mode' by running `tmap_mode()`:
 
-```{r chunk10}
-tmap_mode("view")
+```
+## tmap_mode("view")
 
 ## tmap_mode("plot")  # go back to plot mode
 ```
 
 Now that we're in 'view' mode, tmap objects be rendered as little interactive maps. We can 'redraw' the last tmap object using `tmap_last()`:
 
-```{r chunk11}
+```
 tmap_last()
 ```
 
 Switch-out the basemap:
 
-```{r chunk12}
+```
 tm_shape(yose_bnd_utm |> st_geometry()) + 
   tm_polygons(col = "darkgreen", alpha = 0.2, border.col = "darkgreen", lwd = 2) +
 tm_shape(yose_roads_utm |> st_geometry()) +
@@ -153,7 +155,7 @@ tm_shape(yose_campgrounds_utm |> st_geometry()) +
 
 Lastly we'll disable interactivity (i.e., hover-over text and popup windows) on all layers except for the campgrounds: 
 
-```{r chunk13}
+```
 tm_shape(yose_bnd_utm |> st_geometry()) + 
   tm_polygons(col = "darkgreen", alpha = 0.2, border.col = "darkgreen", lwd = 2, interactive = FALSE) +
 tm_shape(yose_roads_utm |> st_geometry()) +
@@ -171,6 +173,6 @@ Tip: for more control over pop-ups, use leaflet.
 
 Congratulations, you have completed the Notebook! 
 
-To view your Notebook at HTML, save it (again), then click the 'Preview' button in the RStudio toolbar. If
+To view your Notebook at HTML, save it (again), then click the 'Preview' button in the RStudio toolbar.
 
 
