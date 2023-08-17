@@ -264,13 +264,13 @@ working with vector data. It combines the functionality of the older
 functionality from <strong><code>rgdal</code></strong> and
 <strong><code>rgeos</code></strong>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(sf)</span></code></pre></div>
-<p><code>sf</code> stands for ‘simple features’, which is a standard
+<p><code>sf</code> stands for ‘simple feature’, which is a standard
 (developed by the Open Geospatial Consortium) for storing various
 geometry types in a hierarchical data model.</p>
 <p>A ‘feature’ is just a representation of a thing in the real world
 (e.g. a building, a city…).</p>
-<p><code>sf</code> offers numerous specific benefits, including:</p>
-<div class="compact">
+<p>Package features:</p>
+<div class="indented2">
 <ul>
 <li>uses established open source libraries: GDAL, GEOS, PROJ<br />
 </li>
@@ -278,23 +278,36 @@ geometry types in a hierarchical data model.</p>
 </li>
 <li>enhanced plotting<br />
 </li>
-<li>excellent integration with common R data structures (using data
-frames)<br />
-</li>
-<li>integration with the tidyverse packages and <code>|&gt;</code>
-piping syntax<br />
-</li>
-<li>consistent function names (all starting with st_)<br />
-</li>
 <li>objects are supported by an increasing number of other geospatial
 packages<br />
 </li>
 <li>alignment with other software that uses the simple features data
-model (e.g. QGIS, PostGIS), or an analogous one (e.g. Python’s
-Geopandas)<br />
+model (e.g. QGIS, PostGIS)</li>
+</ul>
+</div>
+<p><br />
+</p>
+</div>
+<div id="sf-functions" class="slide section level1">
+<h1><code>sf</code> functions</h1>
+<div class="compact">
+<ul>
+<li>consistent function names (most start with <code>st_</code>)<br />
+</li>
+<li><code>|&gt;</code> pipe friendly!<br />
+</li>
+<li>everything you can do with a regular data frame, you can do with a
+sf data frame (almost)<br />
+</li>
+<li>integrated with the tidyverse packages<br />
 </li>
 </ul>
 </div>
+<p style="text-align:center;">
+<a href="../extras/sf_cheatsheet.pdf"><img src="./images/sf-cheatsheet_544x420x256.png" style="border:1px solid gray;"/></a>
+</p>
+<p><br />
+</p>
 </div>
 <div id="importing-vector-data" class="slide section level1">
 <h1>Importing Vector Data</h1>
